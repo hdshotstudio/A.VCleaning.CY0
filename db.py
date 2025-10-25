@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS bookings (
     status TEXT DEFAULT 'pending', -- pending / accepted / cancelled / done
     created_at TEXT DEFAULT (datetime('now'))
 );
-"""
+\"\"\"
 
 async def init_db():
     async with aiosqlite.connect(DB_FILE) as db:
@@ -25,10 +25,10 @@ async def init_db():
         await db.commit()
 
 async def add_booking(booking: Dict) -> int:
-    query = """
+    query = \"\"\"
     INSERT INTO bookings (user_id, username, service, date, address, phone)
     VALUES (?, ?, ?, ?, ?, ?)
-    """
+    \"\"\"
     async with aiosqlite.connect(DB_FILE) as db:
         cur = await db.execute(query, (
             booking['user_id'],
